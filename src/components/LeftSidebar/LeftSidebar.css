@@ -1,0 +1,103 @@
+.left-sidebar {
+    background-color: #001030;
+    color: white;
+    height: 75vh;
+}
+.left-sidebar-top {
+    padding: 20px;
+}
+.left-sidebar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.left-sidebar-nav .logo {
+    max-width: 140px;
+}
+.left-sidebar-nav .menu img {
+    max-height: 20px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+.left-sidebar-search {
+    background-color: #002670;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-top: 20px;
+}
+.left-sidebar-search img {
+    width: 16px;
+}
+.left-sidebar-search input {
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    color: white;
+    font-size: 11px;
+}
+.left-sidebar-search input::placeholder {
+    color: #c8c8c8;
+}
+.left-sidebar-list {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    overflow-y: scroll;
+}
+.friends img {
+    width: 35px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.friends {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.friends div {
+    display: flex;
+    flex-direction: column;
+}
+.friends span {
+    color: #9f9f9f;
+    font-size: 11px;
+}
+.friends:hover {
+    background-color: #077eff;
+}
+.friends:hover span {
+    color: white;
+}
+.left-sidebar-nav .menu {
+    position: relative;
+    padding: 10px 0px;
+}
+.menu .sub-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 130px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    display: none;
+}
+.sub-menu hr {
+    border: transparent;
+    height: 1px;
+    background-color: #a4a4a4;
+    margin: 8px 0px;
+}
+.sub-menu p {
+    cursor: pointer;
+    font-size: 14px;
+}
+.menu:hover .sub-menu {
+    display: block;
+}
