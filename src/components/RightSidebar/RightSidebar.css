@@ -65,3 +65,9 @@
     border-radius: 20px;
     cursor: pointer;
 }
+
+@media (max-width: 900px) {
+    .right-sidebar {
+        display: none;
+    }
+}

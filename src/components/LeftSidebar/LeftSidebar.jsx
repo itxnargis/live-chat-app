@@ -3,6 +3,7 @@ import './LeftSidebar.css'
 import assets from '../../assets/assets'
 import { useNavigate } from 'react-router-dom'
 import { arrayUnion, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore'
+import { logout } from '../../config/firebase'
 import { db } from '../../config/firebase'
 import { AppContext } from '../../context/AppContext'
 import { toast } from 'react-toastify'
@@ -99,12 +100,12 @@ const LeftSidebar = () => {
             setMessagesId(item.messagesId);
             setChatUser(item);
             const userChatsRef = doc(db, "chats", userData.id);
-            const userChatsSnapshot = await getDocs(userChatsRef);
+            const userChatsSnapshot = await getDoc(userChatsRef);
             const userChatsData = userChatsSnapshot.data();
             const chatIndex = userChatsData.chatsData.findIndex((c) => c.messagesId === item.messagesId);
             userChatsData.chatsData[chatIndex].messageSeen = true;
             await updateDoc(userChatsRef, {
-                chatData: userChatsData.chatsData
+                chatsData: userChatsData.chatsData
             });
             setChatVisible(true);
         } catch (error) {
@@ -134,7 +135,7 @@ const LeftSidebar = () => {
                         <div className="sub-menu">
                             <p onClick={() => navigate("/profile")}>Edit Profile</p>
                             <hr />
-                            <p>Logout</p>
+                            <p onClick={()=>logout()}>Logout</p>
                         </div>
                     </div>
                 </div>
