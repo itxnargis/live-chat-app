@@ -50,6 +50,7 @@ const LeftSidebar = () => {
     const addChat = async () => {
         const messagesRef = collection(db, "messages");
         const chatsRef = collection(db, "chats");
+
         try {
             const newMessageRef = doc(messagesRef);
             await setDoc(newMessageRef, {
@@ -57,7 +58,26 @@ const LeftSidebar = () => {
                 messages: []
             });
 
-            await updateDoc(doc(chatsRef, user.id), {
+            const userChatRef = doc(chatsRef, user.id);
+            const currentUserChatRef = doc(chatsRef, userData.id);
+
+            // Check if the document exists, and create if necessary
+            const userChatSnap = await getDoc(userChatRef);
+            if (!userChatSnap.exists()) {
+                await setDoc(userChatRef, {
+                    chatsData: []
+                });
+            }
+
+            const currentUserChatSnap = await getDoc(currentUserChatRef);
+            if (!currentUserChatSnap.exists()) {
+                await setDoc(currentUserChatRef, {
+                    chatsData: []
+                });
+            }
+
+            // Update documents with the new chat data
+            await updateDoc(userChatRef, {
                 chatsData: arrayUnion({
                     messagesId: newMessageRef.id,
                     lastMessage: "",
@@ -67,11 +87,11 @@ const LeftSidebar = () => {
                 })
             });
 
-            await updateDoc(doc(chatsRef, userData.id), {
+            await updateDoc(currentUserChatRef, {
                 chatsData: arrayUnion({
                     messagesId: newMessageRef.id,
                     lastMessage: "",
-                    rId: userData.id,
+                    rId: user.id,
                     updatedAt: Date.now(),
                     messageSeen: true
                 })
@@ -94,6 +114,7 @@ const LeftSidebar = () => {
             console.error(error);
         }
     };
+
 
     const setChat = async (item) => {
         try {

@@ -47,21 +47,30 @@ const AppContextProvider = (props) => {
         if (userData) {
             const chatRef = doc(db, "chats", userData.id);
             const unSub = onSnapshot(chatRef, async (res) => {
-                const chatItems = res.data().chatData;
-                const tempData = [];
-                for (const item of chatItems) {
-                    const userRef = doc(db, "users", item.rId);
-                    const userSnap = await getDoc(userRef);
-                    const userData = userSnap.data();
-                    tempData.push({ ...item, userData })
+                const chatDataFromDb = res.data()?.chatsData; // safely access chatData
+                if (Array.isArray(chatDataFromDb)) { // Check if chatData is an array
+                    const tempData = [];
+                    for (const item of chatDataFromDb) {
+                        const userRef = doc(db, "users", item.rId);
+                        const userSnap = await getDoc(userRef);
+                        const userData = userSnap.data();
+                        tempData.push({ ...item, userData });
+                    }
+                    // Sort the chat data by the updatedAt field
+                    setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt));
+                } else {
+                    // Handle the case where chatData is not an array
+                    console.warn('chatData is not an array or is missing');
+                    setChatData([]);
                 }
-                setChatData(tempData.sort((a, b) => b.updatedAt - a.updatedAt))
-            })
+            });
+
             return () => {
                 unSub();
-            }
+            };
         }
-    }, [userData])
+    }, [userData]);
+
 
     const value = {
         userData,
