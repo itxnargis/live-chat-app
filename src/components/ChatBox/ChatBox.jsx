@@ -62,7 +62,7 @@ const ChatBox = () => {
         await updateDoc(doc(db, "messages", messagesId), {
           messages: arrayUnion({
             sId: userData.id,
-            text: input,
+            image: fileUrl,
             createdAt: new Date()
           })
         })
@@ -90,7 +90,6 @@ const ChatBox = () => {
       }
     } catch (error) {
       console.error(error);
-
       toast.error(error.message);
     }
   }
@@ -133,7 +132,7 @@ const ChatBox = () => {
           messages.map((msg, index) => (
             <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
               {
-                msg["Image"]
+                msg["image"]
                   ? <img className='msg-img' src={msg.image} alt="" />
                   : <p className='msg'>{msg.text}</p>
               }

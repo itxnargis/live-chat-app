@@ -126,7 +126,7 @@ const LeftSidebar = () => {
             const chatIndex = userChatsData.chatsData.findIndex((c) => c.messagesId === item.messagesId);
             userChatsData.chatsData[chatIndex].messageSeen = true;
             await updateDoc(userChatsRef, {
-                chatsData: userChatsData.chatsData
+                chatData: userChatsData.chatsData
             });
             setChatVisible(true);
         } catch (error) {
@@ -177,7 +177,7 @@ const LeftSidebar = () => {
                             <div
                                 onClick={() => setChat(item)}
                                 key={index}
-                                className={`friends ${item.messageSeen || item.messagesId === messagesId ? "" : "border"}`}
+                                className={`friends ${!item.messageSeen ? "border" : ""}`}
                             >
                                 <img src={item.userData.avatar} alt="" />
                                 <div>
