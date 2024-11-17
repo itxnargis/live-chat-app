@@ -12,7 +12,7 @@ LiveChat is a modern, real-time communication platform built with React and Fire
 
 ## Demo
 
-![image](https://github.com/user-attachments/assets/7a111e59-f870-4c51-af44-32457ebc0095)
+![image](https://github.com/user-attachments/assets/0c0f200b-a8df-483a-a74e-2dabb6c65025)
 
 ## Features
 
