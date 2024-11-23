@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Login.css'
 import assets from '../../assets/assets'
 import { login, resetPassword, signup } from '../../config/firebase';
@@ -29,8 +29,8 @@ const Login = () => {
         <input onChange={(e) => setPassword(e.target.value)} value={password} type="text" placeholder='Password' className="form-input" required />
         <button type='submit'>{currentState === 'Sign Up' ? "Create Account" : "Login"}</button>
         <div className="login-term">
-          <input type="checkbox" />
-          <p>Agree to the term of use & privacy policy.</p>
+          <input id="agreement" type="checkbox" required/>
+          <label htmlFor="agreement">Agree to the term of use & privacy policy.</label>
         </div>
         <div className="login-forgot">
           {currentState === 'Sign Up' ? (

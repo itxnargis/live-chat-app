@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './LeftSidebar.css'
 import assets from '../../assets/assets'
 import { useNavigate } from 'react-router-dom'
@@ -14,11 +14,12 @@ const LeftSidebar = () => {
     const { userData, chatData, chatUser, setChatUser, setMessagesId, messagesId, chatVisible, setChatVisible } = useContext(AppContext);
 
     const [user, setUser] = useState(null);
+
     const [showSearch, setShowSearch] = useState(false);
 
     const inputHandler = async (e) => {
         try {
-            const input = e.target.value;
+            const input = e?.target?.value ?? 'Nargis';
             if (input) {
                 setShowSearch(true);
                 const userRef = collection(db, "users");
@@ -144,6 +145,7 @@ const LeftSidebar = () => {
             }
         };
         updateChatUserData();
+        inputHandler();
     }, [chatData]);
 
     return (

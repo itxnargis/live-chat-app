@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Login from './pages/Login/Login'
 import Chat from './pages/Chat/Chat'
